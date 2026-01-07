@@ -3,9 +3,9 @@ from ursina import *
 import random
 import time
 
-inventory = {"Stick": 1, "Baguette" : 2}
+inventory = {"Stick": 1, "Baguette" : 0, "Popsicle": 0}
 inventoryKeys = list(inventory.keys())
-spritemaps = {"Baguette": "baguette", "Stick": "stick"}
+spritemaps = {"Baguette": "baguette", "Stick": "stick", "Popsicle": "popsicle"}
 
 array = []
 Text.default_font = 'Minecraft.ttf'
@@ -81,16 +81,34 @@ def displayInventory():
         )
         array.append(square)
         array.append(item)
+
         txtVariuble = Text(
             text=value,
-            color =color.black,
-            scale = 1,
-            origin=(54 - i * 15, -9),  
-            always_on_top = True                                    
+            color= color.black,
+            scale=1,
+            origin=(54 - i * 15, -9)
         )
-        print(txtVariuble.origin, txtVariuble.scale)
-        array.append(txtVariuble)
+        if inventory["Baguette"] > 0:
+            txtVariuble.origin ==(54 - 1*15, -9) 
         i += 1
+    #     )
+    #     variuble = spritemaps[key]
+    #     item = Entity(model = "quad", texture = variuble,
+    #         origin=(9.3-i*2.36,-4),
+    #         scale = 0.56,
+    #         always_on_top = True
+    #     )
+    #     array.append(square)
+    #     array.append(item)
+
+    #     txtVariuble = Text(
+    #         text=value,
+    #         color =color.black,
+    #         scale = 1,
+    #         origin=(54 - i * 15, -9),  
+    #         always_on_top = True                                    
+    #     )
+
 zombie1 = Entity(model = "quad", texture="zombie", 
 origin=(0,0),
 scale=2,
@@ -98,33 +116,35 @@ collider = "box",
 on_click = zombie
 
 )
-def beta():
+def AddBaguette():
     global baguette
     ChangeInventory("Baguette", 1)
     print("You got a baguette!")
     time.sleep(0.1)
-    e1.enabled = False
+    baguetteTexture.enabled = False
     time.sleep(0.1)
-    rand = random.randint(1,2)
+    rand = random.randint(1,3)
     if rand == 1:
         zombie1.enabled = True
         zombtxt.enabled = True
-        e1.enabled = False
+        baguetteTexture.enabled = False
         bgtxt.enabled = False
     if rand == 2:
-        e1.enabled = True
+        baguetteTexture.enabled = True
         bgtxt.enabled = True
         zombie1.enabled = False
         zombtxt.enabled = False
-def sigma():
+    #if rand == 3:
+
+def Randomize():
     rand = random.randint(1,2)
     if rand == 1:
         zombie1.enabled = True
         zombtxt.enabled = True
-        e1.enabled = False
+        baguetteTexture.enabled = False
         bgtxt.enabled = False
     if rand == 2:
-        e1.enabled = True
+        baguetteTexture.enabled = True
         bgtxt.enabled = True
         zombie1.enabled = False
         zombtxt.enabled = False
@@ -136,7 +156,7 @@ def openinventory():
         closeButton.enabled = True
         zombie1.enabled = False
         zombtxt.enabled = False
-        e1.enabled = False
+        baguetteTexture.enabled = False
         bgtxt.enabled = False
         buttonplay.enabled = False
         button.enabled = False
@@ -144,19 +164,19 @@ def openinventory():
         shopbutton.enabled = False
         inventorybutton.enabled = False
         shopGuy.enabled = False
-        grug.enabled = False
+        Shopkeeper.enabled = False
         panel.enabled = False
         buttonshop.enabled = False
-def skibidi2():
+def DiceTexturize():
     button.texture = 'dice2' 
-def alpha2():
+def DiceRegular():
     button.texture = 'dice'
 def introplay():
     rand = random.randint(1,2)
     if rand == 1:
         zombie1.enabled = True
         zombtxt.enabled = True
-        e1.enabled = False
+        baguetteTexture.enabled = False
         bgtxt.enabled = False
         buttonplay.enabled = False
         button.enabled = True
@@ -165,7 +185,7 @@ def introplay():
         inventorybutton.enabled = True
     if rand == 2:
         buttonplay.enabled = False
-        e1.enabled = True
+        baguetteTexture.enabled = True
         bgtxt.enabled = True
         zombie1.enabled = False
         zombtxt.enabled = False
@@ -175,17 +195,17 @@ def introplay():
         shopbutton.enabled = True
         inventorybutton.enabled = True
 
-def sigma():
+def Randomize():
     rand = random.randint(1,2)
     if rand == 1:
         zombie1.enabled = True
         zombtxt.enabled = True
-        e1.enabled = False
+        baguetteTexture.enabled = False
         bgtxt.enabled = False
         buttonplay.enabled = False
     if rand == 2:
         buttonplay.enabled = False
-        e1.enabled = True
+        baguetteTexture.enabled = True
         bgtxt.enabled = True
         zombie1.enabled = False
         zombtxt.enabled = False
@@ -194,13 +214,13 @@ def playerturn(enemyheal):
     print ("You attacked the enemy.")
     rand (power * .02)
     enemyheal -= rand
-def billy():
+def ZombieFight():
     rand=random.randint(23,35)
     print("w zombie1 fight ")
     closeButton.enabled = False
     zombie1.enabled = True
     zombtxt.enabled = False
-    e1.enabled = False
+    baguetteTexture.enabled = False
     bgtxt.enabled = False
     buttonplay.enabled = False
     button.enabled = False
@@ -208,7 +228,7 @@ def billy():
     shopbutton.enabled = False
     inventorybutton.enabled = False
     shopGuy.enabled = False
-    grug.enabled = False
+    Shopkeeper.enabled = False
     hp -= rand
     if hp <= 0:
         print("you lost :/")
@@ -220,7 +240,7 @@ def playerAtk():
         zombie1.enabled = False
 
 
-def alpha2():
+def DiceRegular():
     button.texture = 'dice'
 def skibidi():
     buttonplay.texture = "HoverButton" 
@@ -232,7 +252,7 @@ def shop():
     baguetteInventory.enabled = True
     dolla.enabled = True
     buttonplay.enabled = False
-    e1.enabled = False
+    baguetteTexture.enabled = False
     bgtxt.enabled = False
     zombie1.enabled = False
     zombtxt.enabled = False
@@ -240,7 +260,7 @@ def shop():
     button.enabled = False
     intro.enabled = False
     shopGuy.enabled = True
-    grug.enabled = True
+    Shopkeeper.enabled = True
     closeButton.enabled = True
     inBattle = False
 def ShowBar():
@@ -263,9 +283,9 @@ def gudbutton():
 
 def butttoncool():
     global baguette
-    bobbity.enabled = True
+    CurrencyText.enabled = True
     ChangeInventory("Baguette", 1)
-    bobbity.enabled = False
+    CurrencyText.enabled = False
 def Baguetter():
     global timer
     global baguette
@@ -273,7 +293,7 @@ def Baguetter():
     timer = Timer(timedelay, butttoncool)
     timer.start()
     print("hello :0")
-    bobbity.enabled = True
+    CurrencyText.enabled = True
     ChangeInventory("Baguette", -1)
 def win():
     winner.enabled = False
@@ -282,16 +302,16 @@ def win():
 
 ##ENTITIES##
 
-grug = Text(
+Shopkeeper = Text(
     text='wanna buy something? (RHYMES WITH GRUG)',
     scale=2,
     color=color.black,
     origin=(0,-6)
     )
-e1 = Entity(model='cube', texture='Images/baguette.png',
-    on_click=beta,
+baguetteTexture = Entity(model='cube', texture='Images/baguette.png',
+    on_click=AddBaguette,
     collider= "box")
-bobbity = Text(
+CurrencyText = Text(
     text='wow you... bought a baguette... with a baguette. uhm....',
     scale=2,
     color=color.white,
@@ -301,9 +321,9 @@ button = Entity(model = "quad", texture="dice",
     #color=color.yellow,
     origin=(-6,-2.8),
     collider = "box",
-    on_click= sigma,
-    on_mouse_enter= skibidi2,
-    on_mouse_exit= alpha2)
+    on_click= Randomize,
+    on_mouse_enter= DiceTexturize,
+    on_mouse_exit= DiceRegular)
 inventorybutton = Entity(model = "quad", texture="inventory", 
     #color=color.yellow,
     origin=(6,2.8),
@@ -313,7 +333,7 @@ shopbutton = Entity(model = "quad", texture="shopButton",
     origin=(6, 1.4),
     collider = "box",
     on_click= shop)
-shopGuy = Entity(model = "quad", texture="grugGood", 
+shopGuy = Entity(model = "quad", texture="GrugGood", 
     origin=(-0.05,0.5),
     scale=4.7,
 )
@@ -450,7 +470,7 @@ def update():
     #--INACURATE--# ray = raycast(arrow.position - Vec2.one * 2 + Vec2(0.35, 0), direction=Vec2(0, 1), distance=2, debug=True)
     #--ACCURATE--#
     
-    if held_keys ["q"] and inBattle == True:
+    if inBattle == True:
         ShowBar()
         invoke(HideBar, delay=5)
     if winText == True:
@@ -510,7 +530,7 @@ def close():
         closeButton.enabled = False
         zombie1.enabled = True
         zombtxt.enabled = True
-        e1.enabled = False
+        baguetteTexture.enabled = False
         bgtxt.enabled = False
         buttonplay.enabled = False
         button.enabled = True
@@ -518,14 +538,14 @@ def close():
         shopbutton.enabled = True
         inventorybutton.enabled = True
         shopGuy.enabled = False
-        grug.enabled = False
+        Shopkeeper.enabled = False
         panel.enabled = False
         buttonshop.enabled = False
     if rand == 2:
         button.enabled = True
         print("button :)")
         buttonplay.enabled = False
-        e1.enabled = True
+        baguetteTexture.enabled = True
         button0Text.enabled = False
         bgtxt.enabled = True
         zombie1.enabled = False
@@ -536,7 +556,7 @@ def close():
         shopbutton.enabled = True
         inventorybutton.enabled = True
         shopGuy.enabled = False
-        grug.enabled = False
+        Shopkeeper.enabled = False
         closeButton.enabled = False
         dolla.enabled = False
         panel.enabled = False
@@ -549,12 +569,12 @@ closeButton = Entity(model = "quad", texture="closeButton",
 zombie1.enabled = False
 zombtxt.enabled = False
 bgtxt.enabled = False
-e1.enabled = False
+baguetteTexture.enabled = False
 button.enabled = False
 shopbutton.enabled = False
 inventorybutton.enabled = False
 shopGuy.enabled = False
-grug.enabled = False
+Shopkeeper.enabled = False
 closeButton.enabled = False
 greenBar.enabled = True
 bar.enabled = True
@@ -562,7 +582,7 @@ arrow.enabled = True
 dolla.enabled = False
 panel.enabled = False
 buttonshop.enabled = False
-bobbity.enabled = False
+CurrencyText.enabled = False
 button0Text.enabled = False
 winner.enabled = False
 baguetteInventory.enabled = False
